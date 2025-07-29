@@ -1,0 +1,36 @@
+<p class="hover-text" data-img="khush21.png">Hover over me to preview an image</p>
+
+<div id="previewImage"></div>
+<style>
+  #previewImage {
+  position: fixed;
+  pointer-events: none; /* cursor passes through it */
+  display: none;
+  z-index: 999;
+  width: 200px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transition: opacity 0.2s ease;
+}
+
+</style>
+<script>
+  const previewImage = document.getElementById('previewImage');
+  const hoverText = document.querySelector('.hover-text');
+
+  hoverText.addEventListener('mouseenter', (e) => {
+    const imgSrc = hoverText.getAttribute('data-img');
+    previewImage.style.display = 'block';
+    previewImage.innerHTML = `<img src="${imgSrc}" style="width:100%; border-radius:8px;">`;
+  });
+
+  hoverText.addEventListener('mousemove', (e) => {
+    previewImage.style.left = (e.pageX + 20) + 'px';
+    previewImage.style.top = (e.pageY + 20) + 'px';
+  });
+
+  hoverText.addEventListener('mouseleave', () => {
+    previewImage.style.display = 'none';
+  });
+</script>
